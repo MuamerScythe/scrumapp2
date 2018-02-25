@@ -2,7 +2,6 @@
 //include config
 require_once('../includes/config.php');
 require_once('../classes/user.php');
-require_once('../classes/phpmailer/mail.php');
 require_once('../classes/customers.php');
 $user = new User($db);
 $customer = new Customers($db);
