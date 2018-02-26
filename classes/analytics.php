@@ -26,7 +26,9 @@ class Analytics {
 
         $sql = "SELECT
         SUM(IF(vrijeme >= addtime(DATE(vrijeme), '".MEETING_TIME."'),1,0)) AS late,
-        DAYOFWEEK(vrijeme) as day FROM `dolasci` GROUP BY day ORDER BY DATE(vrijeme) ASC LIMIT 7";
+        DATE(vrijeme) as datum, DAYOFWEEK(vrijeme) as day 
+	FROM `dolasci` WHERE vrijeme >= TIMESTAMP(CURDATE() - INTERVAL 6 DAY) 
+	GROUP BY DAYOFYEAR(vrijeme) ORDER BY DATE(vrijeme) ASC LIMIT 7";
         $stmt = $this->_db->prepare($sql);
         $stmt->execute();
         return json_encode($stmt->fetchAll(2));
