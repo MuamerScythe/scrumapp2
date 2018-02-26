@@ -96,7 +96,7 @@ class User extends Password{
     $id = $data['id'];
     $time = date('Y-m-d').' '.$data['time'];
     try {
-        $now = time();
+       $now = strtotime($time);
           if($now > strtotime(MEETING_TIME)) {
             $stmt = $this->_db->prepare("INSERT INTO dolasci (radnik_id,vrijeme,islate) VALUES(:id,:times,1)");
     				$stmt->execute(array(':id' => $id, ':times' => $time));
